@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Asynchronous Behavior</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    color: #007bff;
+}
+
+.description {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+ul {
+    margin: 10px 0;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#callbackOutput, #promiseOutput, #asyncOutput {
+    margin-top: 10px;
+    padding: 10px;
+    background: #e9ecef;
+    border-left: 3px solid #007bff;
+}
+
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Quick Revision: Asynchronous Behavior in JavaScript</h1>
+        <p class="description">
+            This page provides a quick overview of asynchronous behavior in JavaScript, including callbacks, promises, and async/await.
+        </p>
+        
+        <h2>Key Concepts</h2>
+        <ul>
+            <li><strong>Callback Functions:</strong> Functions passed as arguments to other functions to be executed later.</li>
+            <li><strong>Promises:</strong> Objects that represent the eventual completion (or failure) of an asynchronous operation.</li>
+            <li><strong>Async/Await:</strong> Syntax for writing asynchronous code in a more synchronous style, making it easier to read and write.</li>
+        </ul>
+
+        <h2>Examples</h2>
+
+        <h3>Callback Example</h3>
+        <p>Click the button to see the callback in action:</p>
+        <button id="callbackBtn">Fetch Data (Callback)</button>
+        <div id="callbackOutput"></div>
+
+        <h3>Promise Example</h3>
+        <p>Click the button to see the promise in action:</p>
+        <button id="promiseBtn">Fetch Data (Promise)</button>
+        <div id="promiseOutput"></div>
+
+        <h3>Async/Await Example</h3>
+        <p>Click the button to see the async/await in action:</p>
+        <button id="asyncBtn">Fetch Data (Async/Await)</button>
+        <div id="asyncOutput"></div>
+
+        <script>
+            function fetchData(callback) {
+                setTimeout(() => {
+                    callback("Data received via Callback");
+                }, 2000);
+            }
+
+            document.getElementById("callbackBtn").addEventListener("click", () => {
+                fetchData((data) => {
+                    document.getElementById("callbackOutput").innerText = data;
+                });
+            });
+
+            const fetchDataPromise = () => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve("Data received via Promise");
+                    }, 2000);
+                });
+            };
+
+            document.getElementById("promiseBtn").addEventListener("click", () => {
+                fetchDataPromise().then(data => {
+                    document.getElementById("promiseOutput").innerText = data;
+                });
+            });
+
+            const fetchDataAsync = () => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve("Data received via Async/Await");
+                    }, 2000);
+                });
+            };
+
+            document.getElementById("asyncBtn").addEventListener("click", async () => {
+                const data = await fetchDataAsync();
+                document.getElementById("asyncOutput").innerText = data;
+            });
+        </script>
+    </div>
+</body>
+</html>
